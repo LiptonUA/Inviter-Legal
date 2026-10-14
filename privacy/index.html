@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inviter Privacy Policy in Ukrainian and English">
+  <title>Inviter Privacy Policy</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#0c1018; --card:#141b27; --text:#f2f5fa; --muted:#aeb9ca; --accent:#8fc7ff; --line:#2b3749; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(940px,calc(100% - 32px)); margin:0 auto; padding:40px 0 72px; }
+    header, section { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:clamp(20px,4vw,40px); margin-bottom:24px; }
+    h1 { margin:.1em 0 .25em; font-size:clamp(2rem,5vw,3.25rem); line-height:1.1; }
+    h2 { margin:0 0 .8em; font-size:clamp(1.55rem,4vw,2.2rem); }
+    h3 { margin:1.6em 0 .45em; line-height:1.25; }
+    p, li { max-width:78ch; }
+    a { color:var(--accent); }
+    nav { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+    nav a { display:inline-block; padding:9px 14px; border:1px solid var(--line); border-radius:999px; text-decoration:none; }
+    .meta, footer { color:var(--muted); }
+    code { overflow-wrap:anywhere; }
+    @media (prefers-color-scheme: light) { :root { --bg:#f2f5f9; --card:#fff; --text:#172033; --muted:#5e6878; --accent:#075baa; --line:#d8e0eb; } }
+    @media print { body { background:#fff; color:#000; } header,section { border:0; padding:0; } nav { display:none; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="meta">Last updated / Останнє оновлення: 30 September 2026</p>
+    <h1>Inviter Privacy Policy</h1>
+    <p>Політика конфіденційності українською та англійською мовами.</p>
+    <nav aria-label="Language navigation">
+      <a href="#uk" lang="uk">Українська</a>
+      <a href="#en">English</a>
+    </nav>
+  </header>
+
+  <section id="uk" lang="uk">
+    <h2>Політика конфіденційності Inviter</h2>
+
+    <h3>1. Хто обробляє дані</h3>
+    <p>Оператором Inviter є LiptonUA (далі — «ми»). Із питань конфіденційності, доступу, виправлення або видалення даних звертайтеся на <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a>.</p>
+
+    <h3>2. Які дані ми обробляємо</h3>
+    <p><strong>Ідентифікація та профіль.</strong> Під час першого використання Supabase Auth створює анонімний user ID і сесію. Поточна версія не вимагає email, номера телефону, пароля облікового запису чи social sign-in. Ми зберігаємо display name, колір учасника, версію прийнятих Правил і час прийняття.</p>
+    <p><strong>Лобі та запрошення.</strong> Обробляються назви й коди лобі, членство, імена учасників, ігри, запрошення, відповіді, readiness time, необов'язковий текст відмови/відповіді, sound IDs і timestamps. Необов'язковий lobby password передається через HTTPS для серверної перевірки; зберігається тільки salted one-way hash, а не відкритий пароль.</p>
+    <p><strong>Безпека спільноти.</strong> Записи блокування містять ID обох користувачів і timestamps. Скарги містять reporter і target user/sound IDs, category, необов'язкові details, status і time. Блокування не переписує історичні invites.</p>
+    <p><strong>Push і дані пристрою.</strong> Якщо notifications дозволені, обробляються installation ID, anonymous user ID, FCM token і legacy Expo push token, permission/status, generation, platform, package/app version, device model, created/last-seen time та channel-readiness. Tokens не показуються іншим користувачам.</p>
+    <p>Для діагностики доставки зберігаються invite/installation ID, provider і channel, status, attempts, provider message/ticket ID, безпечна error category, HTTP/status result і timestamps. Payload може містити дані invite, потрібні для notification та відкриття відповідного екрана.</p>
+    <p><strong>Custom sounds.</strong> Завантажені audio files та їх назва, формат, розмір, author і технічні metadata зберігаються у Supabase Storage/DB. Bucket має public object URLs: файл може отримати кожен, хто має URL. Personal library metadata також зберігаються локально. Видалення звуку намагається видалити object і metadata, але видалення lobby саме по собі не гарантує видалення раніше uploaded object.</p>
+    <p><strong>Локальні дані.</strong> Пристрій може зберігати display name, color, language, lobby/game cache, personal sounds metadata, selected sound, MRU, deleted-sound markers, anonymous/installation ID та retry/dedupe state.</p>
+    <p><strong>Пошук ігор.</strong> Game-search query передається через Supabase Edge Function до Steam; covers можуть завантажуватися зі Steam/CDN. Preset audio може походити з Mixkit. Ми не отримуємо Steam login.</p>
+
+    <h3>3. Мета обробки</h3>
+    <ul>
+      <li>анонімна сесія, профіль, лобі та membership;</li>
+      <li>invites, responses, history та readiness time;</li>
+      <li>push зі стандартним або підготовленим custom sound;</li>
+      <li>personal sound library та синхронізація;</li>
+      <li>blocking, reporting, дотримання Правил і захист сервісу;</li>
+      <li>діагностика registration/delivery без розкриття secret tokens;</li>
+      <li>game search, безпека, цілісність і робота сервісу.</li>
+    </ul>
+
+    <h3>4. Одержувачі даних</h3>
+    <p>Ми не продаємо personal data і не використовуємо advertising SDK. Дані в необхідному обсязі можуть обробляти Supabase (Auth, DB, Storage, Edge Functions), Google Firebase Cloud Messaging (Android push), Expo (legacy/rollback push path), Steam/CDN (game search/covers) і Mixkit (джерело preset assets). Lobby content видно учасникам; invites/responses — відповідним учасникам. Public sound URL може відкрити кожен, хто його отримав. Providers можуть обробляти дані там, де працює їхня інфраструктура, за власними terms/privacy notices.</p>
+
+    <h3>5. Підстави та вибір</h3>
+    <p>Залежно від застосовного права обробка потрібна для надання сервісу, ґрунтується на consent (зокрема notification permission), наших legitimate interests щодо безпеки/діагностики або legal obligations. Можна не вводити optional text, не upload audio, не задавати lobby password та deny/revoke notifications у налаштуваннях Android. Без permission системні push не надходитимуть, але invites можуть залишатися в app.</p>
+
+    <h3>6. Зберігання та видалення</h3>
+    <p>Єдиного automatic retention period для всіх категорій немає. Дані зберігаються, доки потрібні для описаних функцій, безпеки, діагностики й legal obligations. Leaving lobby видаляє membership; deleting lobby by host видаляє пов'язані lobby records, invites, responses і dependent delivery records за чинними DB constraints. Sounds видаляються окремо. Локальні дані можна частково видалити очищенням даних або uninstall.</p>
+    <p>Повного in-app видалення всієї anonymous identity та всіх пов'язаних даних зараз немає. Надішліть request на <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a>; для пошуку records може знадобитися installation/lobby information. Дані можуть зберігатися, якщо цього потребує закон, security, abuse investigation або права інших користувачів.</p>
+
+    <h3>7. Безпека</h3>
+    <p>API traffic використовує HTTPS. Доступ обмежується authentication/authorization, row-level policies і server-side functions; push secrets залишаються server-side. Lobby password не зберігається plaintext. Абсолютну безпеку зберігання чи передачі гарантувати неможливо.</p>
+
+    <h3>8. User-generated content</h3>
+    <p>Імена, lobby/game names, messages і sounds є UGC. Users приймають Terms, можуть block users і report user/sound. Ми можемо review reports, remove content або restrict access. Inviter не verify identity; взаємодійте лише з людьми, яким довіряєте.</p>
+
+    <h3>9. Діти</h3>
+    <p>Inviter не розроблений і не рекламується спеціально для дітей до 13 років та не має age verification. Якщо дитина надала дані всупереч закону, напишіть на <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a>. Google Play target audience має відповідати фактичному marketing та applicable law.</p>
+
+    <h3>10. Зміни та контакт</h3>
+    <p>Ми можемо оновлювати Policy. Дата на початку показує останню редакцію; про material changes може бути повідомлено в app або на цій сторінці.</p>
+    <p>Оператор: LiptonUA<br>Контакт: <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a></p>
+  </section>
+
+  <section id="en" lang="en">
+    <h2>Inviter Privacy Policy</h2>
+
+    <h3>1. Who processes the data</h3>
+    <p>Inviter is operated by LiptonUA ("we"). For privacy, access, correction, or deletion questions, contact <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a>.</p>
+
+    <h3>2. Data we process</h3>
+    <p><strong>Identity and profile.</strong> On first use, Supabase Auth creates an anonymous user ID and session. The current app does not require email, phone number, an account password, or social sign-in. We store the chosen display name, member color, accepted Terms version, and acceptance time.</p>
+    <p><strong>Lobbies and invitations.</strong> We process lobby names and codes, memberships, member names, games, invitations, responses, readiness time, optional decline/response text, sound IDs, and timestamps. An optional lobby password is sent over HTTPS for server verification; only a salted one-way hash is retained, not the plaintext password.</p>
+    <p><strong>Community safety.</strong> Blocking records contain both user IDs and timestamps. Reports contain reporter and target user/sound IDs, category, optional details, status, and time. Blocking does not rewrite historical invitations.</p>
+    <p><strong>Push and device data.</strong> If notifications are allowed, we process an installation ID, anonymous user ID, FCM token and legacy Expo push token, permission/status, generation, platform, package/app version, device model, created/last-seen time, and channel readiness. Tokens are not exposed to other users.</p>
+    <p>Delivery diagnostics include invite/installation IDs, provider and channel, status, attempts, provider message/ticket ID, safe error category, HTTP/status result, and timestamps. A payload may contain invitation data needed to show a notification and open its screen.</p>
+    <p><strong>Custom sounds.</strong> Uploaded audio and its name, format, size, author, and technical metadata are stored in Supabase Storage/database. The bucket uses public object URLs, so anyone who has the URL may retrieve the file. Personal-library metadata is also local. Removing a sound attempts to remove its object and metadata, but deleting a lobby alone does not guarantee deletion of an earlier uploaded object.</p>
+    <p><strong>Local data.</strong> The device may store the display name, color, language, lobby/game cache, personal-sound metadata, selected sound, recent-use order, deleted-sound markers, anonymous/installation ID, and retry/deduplication state.</p>
+    <p><strong>Game search.</strong> A game-search query is sent through a Supabase Edge Function to Steam; covers may load from Steam/CDN. Preset audio may originate from Mixkit. We do not receive Steam login details.</p>
+
+    <h3>3. Purposes</h3>
+    <ul>
+      <li>anonymous session, profile, lobbies, and membership;</li>
+      <li>invitations, responses, history, and readiness time;</li>
+      <li>push with a standard or prepared custom sound;</li>
+      <li>personal sound library and synchronization;</li>
+      <li>blocking, reporting, Terms enforcement, and service protection;</li>
+      <li>registration/delivery diagnostics without exposing secret tokens;</li>
+      <li>game search and service security, integrity, and operation.</li>
+    </ul>
+
+    <h3>4. Recipients</h3>
+    <p>We do not sell personal data and do not use advertising SDKs. Data may be processed as necessary by Supabase (Auth, database, Storage, Edge Functions), Google Firebase Cloud Messaging (Android push), Expo (legacy/rollback push path), Steam/CDN (game search/covers), and Mixkit (source of preset assets). Lobby content is visible to members; invitations/responses go to relevant members. Anyone who receives a public sound URL may open it. Providers may process data where their infrastructure operates under their own terms and privacy notices.</p>
+
+    <h3>5. Grounds and choices</h3>
+    <p>Depending on applicable law, processing is needed to provide the service, based on consent (including notification permission), our legitimate interests in security/diagnostics, or legal obligations. You may omit optional text, avoid uploading audio or setting a lobby password, and deny/revoke notifications in Android settings. Without permission, system pushes will not arrive, although invitations may remain available in the app.</p>
+
+    <h3>6. Retention and deletion</h3>
+    <p>There is no single automatic retention period for every category. Data is kept while needed for the functions described, security, diagnostics, and legal obligations. Leaving a lobby removes membership; host deletion removes related lobby records, invitations, responses, and dependent delivery records under current database constraints. Sounds are removed separately. Some local data can be removed by clearing app data or uninstalling.</p>
+    <p>The current app has no complete in-app erasure of the anonymous identity and all related data. Send a request to <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a>; installation/lobby information may be needed to locate records. Information may be retained for law, security, abuse investigations, or other users' rights.</p>
+
+    <h3>7. Security</h3>
+    <p>API traffic uses HTTPS. Access is limited through authentication/authorization, row-level policies, and server-side functions; push secrets remain server-side. Lobby passwords are not retained in plaintext. Absolute security cannot be guaranteed.</p>
+
+    <h3>8. User-generated content</h3>
+    <p>Names, lobby/game names, messages, and sounds are UGC. Users accept the Terms, can block users, and can report a user or sound. We may review reports, remove content, or restrict access. Inviter does not verify identity; interact only with people you trust.</p>
+
+    <h3>9. Children</h3>
+    <p>Inviter is not designed or marketed specifically to children under 13 and does not verify age. If a child provided data contrary to law, contact <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a>. The Google Play target audience must match actual marketing and applicable law.</p>
+
+    <h3>10. Changes and contact</h3>
+    <p>We may update this Policy. The date above identifies the latest revision; material changes may be announced in the app or on this page.</p>
+    <p>Operator: LiptonUA<br>Contact: <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>© 2026 LiptonUA · Inviter</p>
+  </footer>
+</main>
+</body>
+</html>
+
