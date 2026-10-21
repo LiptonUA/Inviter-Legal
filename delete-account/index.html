@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Request deletion of an Inviter account and associated data">
+  <meta name="referrer" content="no-referrer">
+  <title>Delete an Inviter account</title>
+  <style>
+    :root { color-scheme:light dark; --bg:#0c1018; --card:#141b27; --text:#f2f5fa; --muted:#aeb9ca; --accent:#8fc7ff; --danger:#ff7b7b; --line:#2b3749; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(900px,calc(100% - 32px)); margin:0 auto; padding:40px 0 72px; }
+    header,section { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:clamp(20px,4vw,40px); margin-bottom:24px; }
+    h1 { margin:.1em 0 .25em; font-size:clamp(2rem,5vw,3.1rem); line-height:1.1; }
+    h2 { margin-top:0; }
+    p,li { max-width:78ch; }
+    a { color:var(--accent); }
+    label { display:block; font-weight:700; margin:18px 0 8px; }
+    input[type="text"] { width:100%; padding:13px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text); font:inherit; }
+    .confirm { display:flex; gap:10px; align-items:flex-start; margin:18px 0; }
+    .confirm label { margin:0; font-weight:400; }
+    button { border:0; border-radius:10px; padding:13px 18px; background:#b42323; color:#fff; font:700 1rem system-ui,-apple-system,"Segoe UI",sans-serif; cursor:pointer; }
+    button:disabled { opacity:.55; cursor:wait; }
+    .meta,.hint,#status,footer { color:var(--muted); }
+    #status[data-kind="error"] { color:var(--danger); }
+    #status[data-kind="success"] { color:#67dc92; }
+    @media (prefers-color-scheme:light) { :root { --bg:#f2f5f9; --card:#fff; --text:#172033; --muted:#5e6878; --accent:#075baa; --danger:#a31818; --line:#d8e0eb; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="meta">LiptonUA · Inviter · Android package <code>com.inviter.app</code></p>
+    <h1>Delete an Inviter account</h1>
+    <p>Видалення анонімного облікового запису Inviter та пов'язаних даних.</p>
+  </header>
+
+  <section lang="uk">
+    <h2>Видалення поза застосунком</h2>
+    <ol>
+      <li>У Inviter відкрийте <strong>Налаштування → Обліковий запис → Скопіювати код зовнішнього видалення</strong>. Код діє 30 днів.</li>
+      <li>Вставте код нижче. Після підтвердження видалення виконується на цій сторінці — повторно відкривати застосунок не потрібно.</li>
+    </ol>
+    <p class="hint">Код є секретним доказом контролю над анонімним акаунтом. Не передавайте його іншим людям.</p>
+  </section>
+
+  <section>
+    <h2>External account deletion</h2>
+    <ol>
+      <li>In Inviter, open <strong>Settings → Account → Copy external deletion code</strong>. The code remains valid for 30 days.</li>
+      <li>Paste it below. Deletion is completed from this page; the app does not need to be opened again.</li>
+    </ol>
+    <p class="hint">The code is secret proof that you control the anonymous account. Do not share it.</p>
+
+    <form id="deletion-form">
+      <label for="deletion-code">Account deletion code</label>
+      <input id="deletion-code" name="code" type="text" inputmode="text" autocomplete="off" spellcheck="false" required pattern="invdel_[A-Za-z0-9_-]{43}" aria-describedby="code-help">
+      <p id="code-help" class="hint">Expected format: <code>invdel_…</code></p>
+      <div class="confirm">
+        <input id="confirm-delete" type="checkbox" required>
+        <label for="confirm-delete">I understand that this permanently deletes the account and associated data.</label>
+      </div>
+      <button id="delete-button" type="submit">Delete account permanently</button>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section>
+    <h2>Data deleted / Дані, що видаляються</h2>
+    <ul>
+      <li>the anonymous Supabase Auth identity and active sessions;</li>
+      <li>profile and lobby memberships; lobbies hosted by the account;</li>
+      <li>invitations, responses, and related history created by the account;</li>
+      <li>uploaded custom sounds and their Storage objects;</li>
+      <li>push tokens, installations, channel readiness, cohorts, and delivery diagnostics;</li>
+      <li>Terms acceptance, blocks, and reports linked to the account.</li>
+    </ul>
+    <p>Other users' independent accounts and lobbies are not deleted. Deleting a host account removes that hosted lobby and its dependent records. Inviter does not intentionally retain account-linked application data after successful deletion. Limited infrastructure backups or security logs may remain temporarily under the hosting providers' retention and legal obligations and are not used to recreate the account.</p>
+    <p>Web deletion cannot erase data cached only on a device. Clear Inviter's Android app data or uninstall it to remove any remaining local cache.</p>
+  </section>
+
+  <footer>
+    <p>Support: <a href="mailto:inviter.support@gmail.com">inviter.support@gmail.com</a> · Developer: LiptonUA</p>
+    <p><a href="../privacy/">Privacy Policy</a> · <a href="../terms/">Terms of Use</a></p>
+  </footer>
+</main>
+<script>
+  (() => {
+    const endpoint = 'https://angbwsqtxtdgzojmgzxf.supabase.co/functions/v1/account-deletion';
+    const form = document.getElementById('deletion-form');
+    const input = document.getElementById('deletion-code');
+    const button = document.getElementById('delete-button');
+    const status = document.getElementById('status');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      button.disabled = true;
+      status.dataset.kind = '';
+      status.textContent = 'Deleting account…';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'delete_with_code', code: input.value.trim() }),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.error === 'invalid_or_expired_code'
+            ? 'The deletion code is invalid or expired.'
+            : 'Deletion could not be completed. Please try again.');
+        }
+        input.value = '';
+        form.reset();
+        status.dataset.kind = 'success';
+        status.textContent = 'Account and associated application data were deleted.';
+      } catch (error) {
+        status.dataset.kind = 'error';
+        status.textContent = error instanceof Error ? error.message : 'Deletion could not be completed.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
+
